@@ -1,11 +1,16 @@
 package dev.kosmx.playerAnim.minecraftApi;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.mojang.serialization.JsonOps;
 import dev.kosmx.playerAnim.api.IPlayable;
 import dev.kosmx.playerAnim.minecraftApi.codec.AnimationCodecs;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.ApiStatus;
@@ -139,11 +144,22 @@ public final class PlayerAnimationRegistry {
      */
     public static String serializeTextToString(String arg) {
         try {
-            var component = Component.Serializer.fromJson(arg, RegistryAccess.EMPTY);
+            var component = fromJson(arg);
             if (component != null) {
                 return component.getString();
             }
         } catch(Exception ignored) { }
         return arg.replace("\"", "");
+    }
+
+    private static MutableComponent fromJson(String string) {
+        JsonElement jsonElement = JsonParser.parseString(string);
+        return jsonElement == null ? null : deserialize(jsonElement);
+    }
+
+    private static MutableComponent deserialize(JsonElement jsonElement) {
+        return (MutableComponent)ComponentSerialization.CODEC
+                .parse(RegistryAccess.EMPTY.createSerializationContext(JsonOps.INSTANCE), jsonElement)
+                .getOrThrow(JsonParseException::new);
     }
 }
