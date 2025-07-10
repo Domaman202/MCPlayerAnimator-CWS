@@ -57,34 +57,34 @@ public class ItemInHandRendererMixin {
         }
     }
 
-    @Inject(method = "renderItem", at = @At("HEAD"))
-    void changeItemLocation(
-            LivingEntity livingEntity,
-            ItemStack itemStack,
-            ItemDisplayContext itemDisplayContext,
-            PoseStack poseStack,
-            MultiBufferSource multiBufferSource,
-            int i,
-            CallbackInfo ci
-    ) {
-        if(livingEntity instanceof IAnimatedPlayer player) {
-            if (player.playerAnimator_getAnimation().isActive()) {
-                AnimationProcessor anim = player.playerAnimator_getAnimation();
-
-                final var key = itemDisplayContext.leftHand() ? PartKey.LEFT_ITEM : PartKey.RIGHT_ITEM;
-                Vec3f scale = anim.get3DTransform(key, TransformType.SCALE,
-                        new Vec3f(ModelPart.DEFAULT_SCALE, ModelPart.DEFAULT_SCALE, ModelPart.DEFAULT_SCALE)
-                );
-                Vec3f rot = anim.get3DTransform(key, TransformType.ROTATION, Vec3f.ZERO);
-                Vec3f pos = anim.get3DTransform(key, TransformType.POSITION, Vec3f.ZERO).scale(1/16f);
-
-                poseStack.scale(scale.getX(), scale.getY(), scale.getZ());
-                poseStack.translate(pos.getX(), pos.getY(), pos.getZ());
-
-                poseStack.mulPose(Axis.ZP.rotation(rot.getZ()));    //roll
-                poseStack.mulPose(Axis.YP.rotation(rot.getY()));    //pitch
-                poseStack.mulPose(Axis.XP.rotation(rot.getX()));    //yaw
-            }
-        }
-    }
+//    @Inject(method = "renderItem", at = @At("HEAD"))
+//    void changeItemLocation(
+//            LivingEntity livingEntity,
+//            ItemStack itemStack,
+//            ItemDisplayContext itemDisplayContext,
+//            PoseStack poseStack,
+//            MultiBufferSource multiBufferSource,
+//            int i,
+//            CallbackInfo ci
+//    ) {
+//        if(livingEntity instanceof IAnimatedPlayer player) {
+//            if (player.playerAnimator_getAnimation().isActive()) {
+//                AnimationProcessor anim = player.playerAnimator_getAnimation();
+//
+//                final var key = itemDisplayContext.leftHand() ? PartKey.LEFT_ITEM : PartKey.RIGHT_ITEM;
+//                Vec3f scale = anim.get3DTransform(key, TransformType.SCALE,
+//                        new Vec3f(ModelPart.DEFAULT_SCALE, ModelPart.DEFAULT_SCALE, ModelPart.DEFAULT_SCALE)
+//                );
+//                Vec3f rot = anim.get3DTransform(key, TransformType.ROTATION, Vec3f.ZERO);
+//                Vec3f pos = anim.get3DTransform(key, TransformType.POSITION, Vec3f.ZERO).scale(1/16f);
+//
+//                poseStack.scale(scale.getX(), scale.getY(), scale.getZ());
+//                poseStack.translate(pos.getX(), pos.getY(), pos.getZ());
+//
+//                poseStack.mulPose(Axis.ZP.rotation(rot.getZ()));    //roll
+//                poseStack.mulPose(Axis.YP.rotation(rot.getY()));    //pitch
+//                poseStack.mulPose(Axis.XP.rotation(rot.getX()));    //yaw
+//            }
+//        }
+//    }
 }
