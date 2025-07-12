@@ -2,14 +2,17 @@
   "schemaVersion": 1,
   "id": "playeranimator",
   "version": "${version}",
-  "name": "Player Animator",
+  "name": "Player Animator (CWS)",
   "description": "A lightweight library to easily animate the player",
   "authors": [
-    "KosmX  "
+    "KosmX",
+    "DomamaN202",
+    "ConceptWorx Studios"
   ],
   "contact": {
-    "homepage": "kosmx.dev",
-    "sources": "https://github.com/KosmX/fabricPlayerAnimation"
+    "homepage": "https://t.me/CWS_chat",
+    "sources": "https://github.com/Domaman202/PlayerAnimator-CWS",
+    "issues": "https://github.com/Domaman202/PlayerAnimator-CWS/issues"
   },
   "provides": [
     "player-animator"

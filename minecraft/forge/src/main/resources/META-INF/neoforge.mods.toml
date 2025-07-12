@@ -6,9 +6,9 @@ license = "MIT"
 [[mods]]
 modId = "playeranimator"
 version = "${version}"
-displayURL = "https://github.com/KosmX/minecraftPlayerAnimator"
-displayName = "Player Animator"
-authors = "KosmX"
+displayURL = "https://github.com/Domaman202/PlayerAnimator-CWS"
+displayName = "Player Animator (CWS)"
+authors = "KosmX, DomamaN202, ConceptWorx Studios"
 description = "A lightweight library to easily animate the player"
 #logoFile = ""
 
